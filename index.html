@@ -18,15 +18,19 @@
   <main class="container">
     <section class="date-filter-section">
       <h2>Select Date</h2>
-      <form>
+      <form onsubmit="event.preventDefault();">
         <input type="date" id="lotteryDate" required />
-        <button type="submit">Get Results</button>
+        <div style="margin-top: 20px;">
+          <button onclick="downloadResult('1PM')">Download 1 PM Result</button>
+          <button onclick="downloadResult('8PM')">Download 8 PM Result</button>
+        </div>
       </form>
       <div id="resultsSection"></div>
     </section>
 
     <section id="result"></section>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
