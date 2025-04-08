@@ -1,100 +1,47 @@
-/* styles.css */
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f9fa;
-  color: #333;
-}
-
-header {
-  background-color: #e60000;
-  color: white;
-  padding: 1rem 0;
+  font-family: Arial, sans-serif;
+  background: #f1f1f1;
   text-align: center;
+  padding: 50px;
 }
 
-.container {
-  width: 90%;
-  max-width: 600px;
-  margin: auto;
-  padding: 2rem 0;
-}
-
-.date-filter-section {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+h1 {
+  color: #1a73e8;
 }
 
 input[type="date"] {
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin-right: 1rem;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  background-color: #e60000;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
+#resultContainer {
+  margin-top: 30px;
 }
 
-button:hover {
-  background-color: #cc0000;
-}
-
-.download-buttons {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.download-buttons .btn {
+a.download-btn {
   display: inline-block;
-  padding: 0.75rem;
-  background-color: #e60000;
+  margin: 10px;
+  padding: 12px 24px;
+  background-color: #28a745;
   color: white;
-  text-align: center;
   text-decoration: none;
-  font-weight: bold;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.download-buttons .btn:hover {
-  background-color: #cc0000;
-}
-
-#result {
-  margin-top: 2rem;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-#result ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-#result li {
-  margin-bottom: 0.8rem;
-}
-
-#result a {
-  color: #e60000;
   font-weight: bold;
-  text-decoration: none;
 }
 
-#result a:hover {
-  text-decoration: underline;
+a.download-btn:hover {
+  background-color: #218838;
+}
+
+iframe {
+  width: 90%;
+  height: 500px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
 }
