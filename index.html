@@ -4,44 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LotteryResult - Daily Draw</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f1f1f1;
-      text-align: center;
-      padding: 50px;
-    }
-
-    h1 {
-      color: #1a73e8;
-    }
-
-    input[type="date"] {
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-
-    #resultContainer {
-      margin-top: 30px;
-      display: none;
-    }
-
-    a.download-btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      background-color: #28a745;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-
-    a.download-btn:hover {
-      background-color: #218838;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -52,35 +15,6 @@
 
   <div id="resultContainer"></div>
 
-  <script>
-    document.getElementById("dateInput").addEventListener("change", function () {
-      const selectedDate = this.value;
-      const resultContainer = document.getElementById("resultContainer");
-
-      if (!selectedDate) {
-        resultContainer.style.display = "none";
-        return;
-      }
-
-      // Clear old content
-      resultContainer.innerHTML = "";
-
-      // Format date to dd-mm-yyyy
-      const dateObj = new Date(selectedDate);
-      const displayDate = dateObj.toLocaleDateString("en-IN", {
-        day: "2-digit", month: "2-digit", year: "numeric"
-      });
-
-      // Create download links
-      resultContainer.innerHTML = `
-        <h2>Results for ${displayDate}</h2>
-        <a class="download-btn" href="/results/${selectedDate}_1PM.pdf" download>Download 1 PM Result</a>
-        <a class="download-btn" href="/results/${selectedDate}_8PM.pdf" download>Download 8 PM Result</a>
-      `;
-
-      resultContainer.style.display = "block";
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
