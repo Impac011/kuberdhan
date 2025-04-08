@@ -25,7 +25,21 @@
       <ul id="resultLinks"></ul>
     </section>
   </main>
+  <script>
+  const dateInput = document.getElementById('lotteryDate');
+  const resultDiv = document.getElementById('result');
 
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const selectedDate = dateInput.value;
+    const filePath = `./uploads/${selectedDate}.pdf`;
+
+    resultDiv.innerHTML = `
+      <h3>Result for ${selectedDate}</h3>
+      <a href="${filePath}" download>Download PDF</a>
+    `;
+  });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
