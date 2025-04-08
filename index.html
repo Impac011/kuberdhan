@@ -2,44 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kuber Dhan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lottery Result</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
   <header>
     <div class="container">
-      <h1>Kuber Dhan</h1>
-      <p>Get Daily Lottery Results Instantly</p>
+      <h1>Lottery Result</h1>
+      <p>Check Your Result by Date</p>
     </div>
   </header>
 
   <main class="container">
     <section class="date-filter-section">
-      <h2>Select Date to View Results</h2>
-      <input type="date" id="lotteryDate" />
+      <h2>Select Date</h2>
+      <form>
+        <input type="date" id="lotteryDate" required />
+        <button type="submit">Get Results</button>
+      </form>
     </section>
 
-    <section class="result-list">
-      <h2>Available Results</h2>
-      <ul id="resultLinks"></ul>
-    </section>
+    <section id="result"></section>
   </main>
+
+  <!-- 🧠 Script to handle result links -->
   <script>
-  const dateInput = document.getElementById('lotteryDate');
-  const resultDiv = document.getElementById('result');
+    const dateInput = document.getElementById('lotteryDate');
+    const resultDiv = document.getElementById('result');
 
-  document.querySelector('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const selectedDate = dateInput.value;
-    const filePath = `./uploads/${selectedDate}.pdf`;
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const selectedDate = dateInput.value;
 
-    resultDiv.innerHTML = `
-      <h3>Result for ${selectedDate}</h3>
-      <a href="${filePath}" download>Download PDF</a>
-    `;
-  });
+      if (!selectedDate) {
+        resultDiv.innerHTML = "<p>Please select a date.</p>";
+        return;
+      }
+
+      const resultHTML = `
+        <h3>Results for ${selectedDate}</h3>
+        <ul>
+          <li><a href="./uploads/${selectedDate}-1PM.pdf" download>Download 1 PM Result</a></li>
+          <li><a href="./uploads/${selectedDate}-8PM.pdf" download>Download 8 PM Result</a></li>
+        </ul>
+      `;
+
+      resultDiv.innerHTML = resultHTML;
+    });
   </script>
-  <script src="script.js"></script>
 </body>
 </html>
