@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+.env
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mac system files
+*.DS_Store
+
+# Local uploads if using server
+uploads/*
+!uploads/.gitkeep
+
+# Ignore temp or build files
+dist/
+build/
+.cache/
+.vscode/
