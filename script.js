@@ -1,41 +1,24 @@
-const dateInput = document.getElementById("date");
-const resultDiv = document.getElementById("result");
+document.addEventListener("DOMContentLoaded", function () {
+  const dateInput = document.getElementById("lotteryDate");
+  const resultsSection = document.getElementById("resultsSection");
 
-function checkFileExists(url, callback) {
-  fetch(url, { method: 'HEAD' })
-    .then(res => callback(res.ok))
-    .catch(() => callback(false));
-}
+  dateInput.addEventListener("change", function () {
+    const selectedDate = this.value;
 
-function renderDownloadLink(date, time) {
-  const fileName = `${date}-${time}.pdf`;
-  const filePath = `./uploads/${fileName}`;
+    if (selectedDate) {
+      // Format date as YYYY-MM-DD
+      const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
 
-  return new Promise(resolve => {
-    checkFileExists(filePath, exists => {
-      if (exists) {
-        resolve(`<li><a href="${filePath}" download>Download ${time} Result</a></li>`);
-      } else {
-        resolve(`<li><span style="color: red;">${time} Result not available</span></li>`);
-      }
-    });
+      // Create download links for 1 PM and 8 PM
+      resultsSection.innerHTML = `
+        <h3>Results for ${formattedDate}</h3>
+        <div class="download-buttons">
+          <a href="uploads/${formattedDate}_1PM.pdf" download class="btn" target="_blank">Download 1 PM Result</a>
+          <a href="uploads/${formattedDate}_8PM.pdf" download class="btn" target="_blank">Download 8 PM Result</a>
+        </div>
+      `;
+    } else {
+      resultsSection.innerHTML = "";
+    }
   });
-}
-
-document.querySelector('form').addEventListener('submit', async function (e) {
-  e.preventDefault();
-  const selectedDate = dateInput.value;
-
-  if (!selectedDate) {
-    resultDiv.innerHTML = "<p>Please select a date.</p>";
-    return;
-  }
-
-  const onePM = await renderDownloadLink(selectedDate, '1PM');
-  const eightPM = await renderDownloadLink(selectedDate, '8PM');
-
-  resultDiv.innerHTML = `
-    <h3>Results for ${selectedDate}</h3>
-    <ul>${onePM}${eightPM}</ul>
-  `;
 });
