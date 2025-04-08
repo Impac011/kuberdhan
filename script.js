@@ -1,24 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const dateInput = document.getElementById("lotteryDate");
-  const resultsSection = document.getElementById("resultsSection");
+document.getElementById("dateInput").addEventListener("change", async function () {
+  const selectedDate = this.value;
+  const resultContainer = document.getElementById("resultContainer");
 
-  dateInput.addEventListener("change", function () {
-    const selectedDate = this.value;
+  resultContainer.innerHTML = "";
+  if (!selectedDate) return;
 
-    if (selectedDate) {
-      // Format date as YYYY-MM-DD
-      const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
+  // Format display date
+  const displayDate = new Date(selectedDate).toLocaleDateString("en-IN", {
+    day: "2-digit", month: "2-digit", year: "numeric"
+  });
 
-      // Create download links using dash (-) instead of underscore (_)
-      resultsSection.innerHTML = `
-        <h3>Results for ${formattedDate}</h3>
-        <div class="download-buttons">
-          <a href="uploads/${formattedDate}-1PM.pdf" download class="btn" target="_blank">Download 1 PM Result</a>
-          <a href="uploads/${formattedDate}-8PM.pdf" download class="btn" target="_blank">Download 8 PM Result</a>
-        </div>
+  // Construct file URLs
+  const urls = {
+    "1 PM": `/results/${selectedDate}_1PM.pdf`,
+    "8 PM": `/results/${selectedDate}_8PM.pdf`
+  };
+
+  let anyResultAvailable = false;
+
+  for (let [time, url] of Object.entries(urls)) {
+    const exists = await checkFileExists(url);
+    if (exists) {
+      anyResultAvailable = true;
+      resultContainer.innerHTML += `
+        <h2>${time} Result (${displayDate})</h2>
+        <iframe src="${url}" title="${time} PDF Preview"></iframe><br/>
+        <a class="download-btn" href="${url}" download>Download ${time} Result</a>
       `;
     } else {
-      resultsSection.innerHTML = "";
+      resultContainer.innerHTML += `
+        <h2>${time} Result (${displayDate})</h2>
+        <p class="error-message">No result available.</p>
+      `;
     }
-  });
+  }
+
+  resultContainer.style.display = "block";
 });
+
+async function checkFileExists(url) {
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    return res.ok;
+  } catch (err) {
+    return false;
+  }
+}
