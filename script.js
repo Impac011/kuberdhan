@@ -1,7 +1,28 @@
-const dateInput = document.getElementById('lotteryDate');
-const resultDiv = document.getElementById('result');
+const dateInput = document.getElementById("date");
+const resultDiv = document.getElementById("result");
 
-document.querySelector('form').addEventListener('submit', function (e) {
+function checkFileExists(url, callback) {
+  fetch(url, { method: 'HEAD' })
+    .then(res => callback(res.ok))
+    .catch(() => callback(false));
+}
+
+function renderDownloadLink(date, time) {
+  const fileName = `${date}-${time}.pdf`;
+  const filePath = `./uploads/${fileName}`;
+
+  return new Promise(resolve => {
+    checkFileExists(filePath, exists => {
+      if (exists) {
+        resolve(`<li><a href="${filePath}" download>Download ${time} Result</a></li>`);
+      } else {
+        resolve(`<li><span style="color: red;">${time} Result not available</span></li>`);
+      }
+    });
+  });
+}
+
+document.querySelector('form').addEventListener('submit', async function (e) {
   e.preventDefault();
   const selectedDate = dateInput.value;
 
@@ -10,13 +31,11 @@ document.querySelector('form').addEventListener('submit', function (e) {
     return;
   }
 
-  const resultHTML = `
-    <h3>Results for ${selectedDate}</h3>
-    <ul>
-      <li><a href="./uploads/${selectedDate}-1PM.pdf" download>Download 1 PM Result</a></li>
-      <li><a href="./uploads/${selectedDate}-8PM.pdf" download>Download 8 PM Result</a></li>
-    </ul>
-  `;
+  const onePM = await renderDownloadLink(selectedDate, '1PM');
+  const eightPM = await renderDownloadLink(selectedDate, '8PM');
 
-  resultDiv.innerHTML = resultHTML;
+  resultDiv.innerHTML = `
+    <h3>Results for ${selectedDate}</h3>
+    <ul>${onePM}${eightPM}</ul>
+  `;
 });
