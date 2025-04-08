@@ -12,8 +12,8 @@ document.getElementById("dateInput").addEventListener("change", async function (
 
   // Construct file URLs
   const urls = {
-    "1 PM": `/results/${selectedDate}_1PM.pdf`,
-    "8 PM": `/results/${selectedDate}_8PM.pdf`
+    "1 PM": `/upload/${selectedDate}_1PM.pdf`,
+    "8 PM": `/upload/${selectedDate}_8PM.pdf`
   };
 
   let anyResultAvailable = false;
