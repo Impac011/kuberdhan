@@ -1,52 +1,77 @@
+/* styles.css */
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f2f2f2;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+header {
+  background-color: #e60000;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
 }
 
 .container {
   width: 90%;
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
-  padding: 20px;
-  text-align: center;
+  padding: 2rem 0;
 }
 
-header {
-  background: #004aad;
+.date-filter-section {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input[type="date"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #e60000;
   color: white;
-  padding: 20px 0;
-}
-
-nav {
-  background: #003c8f;
-  padding: 10px 0;
-}
-
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
+  border: none;
+  border-radius: 5px;
   font-weight: bold;
+  cursor: pointer;
 }
 
-.result-list ul {
-  list-style: none;
+button:hover {
+  background-color: #cc0000;
+}
+
+#result {
+  margin-top: 2rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+#result ul {
+  list-style-type: none;
   padding: 0;
 }
 
-.result-list li {
-  margin: 10px 0;
+#result li {
+  margin-bottom: 0.8rem;
 }
 
-.result-list a {
-  color: #004aad;
+#result a {
+  color: #e60000;
+  font-weight: bold;
   text-decoration: none;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
+#result a:hover {
+  text-decoration: underline;
 }
